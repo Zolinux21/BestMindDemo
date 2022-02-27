@@ -7,6 +7,7 @@ import java.lang.ModuleLayer.Controller;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,31 +15,30 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 
 
 public class Main extends Application {
 	
 	private int count = 0;
-	private final Label text = new Label(Integer.toString(count));
+	private final Label lblGameTime = new Label(Integer.toString(count));
+	
 	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			
-			FileInputStream input1 = new FileInputStream("/home/grabowsky/Pictures/BestMindDemo/1.jpg");
-			Image image1 = new Image(input1, 1000, 1000, false, false);
-			FileInputStream input2 = new FileInputStream("/home/grabowsky/Pictures/BestMindDemo/2.jpg");
-			Image image2 = new Image(input2, 1000, 1000, false, false);
-			
+			ImageContainer.readFileInputs();
+			//
 			ImageView imageView = new ImageView();
-			imageView.setImage(image1);
+			imageView.setImage(ImageContainer.backGround);
+			//
+			StackPane root = new StackPane();
+		    root.getChildren().addAll(	imageView,
+							    		lblGameTime);
 
-	      //  root.getChildren().add(text);
-			HBox hbox = new HBox(text, imageView);
-
-	        Scene scene = new Scene(hbox);
-	        
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	        Scene scene = new Scene(root);
+	        //
+	        //sceneImage.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
 	        // longrunning operation runs on different thread
 	        Thread thread = new Thread(new Runnable() {
@@ -51,9 +51,9 @@ public class Main extends Application {
 	                    public void run() {
 	                       // incrementCount();
 	                    	count++;
-	            	        text.setText(Integer.toString(count));
+	                    	lblGameTime.setText(Integer.toString(count));
 	            	        if (count > 4)
-	            	        imageView.setImage(image2);
+	            	        imageView.setImage(ImageContainer.image2);
 	                    }
 	                };
 
@@ -74,7 +74,7 @@ public class Main extends Application {
 	        thread.start();
 			
 			
-						
+	        //scene.setCursor(Cursor.NONE);		
 			primaryStage.setScene(scene);
 			//primaryStage.setFullScreen(true);
 			primaryStage.setMaximized(true);
