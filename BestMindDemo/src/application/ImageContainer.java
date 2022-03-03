@@ -26,10 +26,10 @@ public class ImageContainer {
 	static void readFileInputs() {
 		try {
 			
-			backGroundInput = new FileInputStream("/home/grabowsky/Pictures/BestMindDemo/backGround.jpg");
-			input1 = new FileInputStream("/home/grabowsky/Pictures/BestMindDemo/1.jpg");
-			input2 = new FileInputStream("/home/grabowsky/Pictures/BestMindDemo/2.jpg");
-			input3 = new FileInputStream("/home/grabowsky/Pictures/BestMindDemo/3.jpg");
+			backGroundInput = new FileInputStream("/home/grabowsky/git/BestMindDemo/Resources/Image/backGround.jpg");
+			input1 = new FileInputStream("/home/grabowsky/git/BestMindDemo/Resources/Image/1.jpg");
+			input2 = new FileInputStream("/home/grabowsky/git/BestMindDemo/Resources/Image/2.jpg");
+			input3 = new FileInputStream("/home/grabowsky/git/BestMindDemo/Resources/Image/3.jpg");
 			
 			backGround = new Image(backGroundInput, ratio.X, ratio.Y, false, false);
 			image1 = new Image(input1, ratio.X, ratio.Y, false, false);

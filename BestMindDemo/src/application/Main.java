@@ -27,6 +27,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			SoundPlayer.play();
 			ImageContainer.readFileInputs();
 			//
 			ImageView imageView = new ImageView();
@@ -52,8 +53,10 @@ public class Main extends Application {
 	                       // incrementCount();
 	                    	count++;
 	                    	lblGameTime.setText(Integer.toString(count));
-	            	        if (count > 4)
+	            	        if (count > 4) {
 	            	        imageView.setImage(ImageContainer.image2);
+	            	        //imageView.setVisible(false);
+	            	        }
 	                    }
 	                };
 
