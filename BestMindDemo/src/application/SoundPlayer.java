@@ -19,7 +19,7 @@ public class SoundPlayer {
 	    	Mixer.Info[] mixerInfo = AudioSystem.getMixerInfo();
 	        Mixer.Info info = mixerInfo[2]; //Edit this number to select output // 0 = Default
 	        Clip clip = AudioSystem.getClip(info);
-	        clip.open(AudioSystem.getAudioInputStream(new File("/home/grabowsky/git/BestMindDemo/Resources/Sound/bgMusic.wav")));
+	        clip.open(AudioSystem.getAudioInputStream(new File("/home/grabowsky/git/Resources/Sound/bgMusic.wav")));
 	        clip.start();
 	    } catch (Exception e) {
 	    	System.out.println(e);
