@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.lang.ModuleLayer.Controller;
 
+import application.SoundPlayer.sound;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -27,7 +28,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			SoundPlayer.play();
+			//SoundPlayer.play(SoundPlayer.sound.BACKGROUND);
 			ImageContainer.readFileInputs();
 			//
 			ImageView imageView = new ImageView();
@@ -53,16 +54,17 @@ public class Main extends Application {
 	                       // incrementCount();
 	                    	count++;
 	                    	lblGameTime.setText(Integer.toString(count));
-	            	        if (count > 4) {
+	            	        if (count > 1) {
 	            	        imageView.setImage(ImageContainer.image2);
 	            	        //imageView.setVisible(false);
+	            	        SoundPlayer.play(SoundPlayer.sound.DOOR);
 	            	        }
 	                    }
 	                };
 
 	                while (true) {
 	                    try {
-	                        Thread.sleep(1000);
+	                        Thread.sleep(3000);
 	                    } catch (InterruptedException ex) {
 	                    }
 
