@@ -28,7 +28,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			//SoundPlayer.play(SoundPlayer.sound.BACKGROUND);
+			SoundPlayer.play(SoundPlayer.sound.BACKGROUND);
 			ImageContainer.readFileInputs();
 			//
 			ImageView imageView = new ImageView();
