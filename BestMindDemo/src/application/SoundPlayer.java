@@ -29,22 +29,22 @@ public class SoundPlayer {
 		
 		switch(selectSound) {
 		case BACKGROUND:
-			subPlayer("/home/grabowsky/git/Resources/Sound/BACKGROUND.wav", 0);
+			subPlayer("/home/grabowsky/git/Resources/Sound/BACKGROUND.wav", 100);
 			break;
 		case LOSE:
-			subPlayer("/home/grabowsky/git/Resources/Sound/LOSE.wav", 0);
+			subPlayer("/home/grabowsky/git/Resources/Sound/LOSE.wav", 50);
 			break;
 		case WIN:
-			subPlayer("/home/grabowsky/git/Resources/Sound/WIN.wav", 0);
+			subPlayer("/home/grabowsky/git/Resources/Sound/WIN.wav", 50);
 			break;
 		case HELP:
-			subPlayer("/home/grabowsky/git/Resources/Sound/HELP.wav", 0);
+			subPlayer("/home/grabowsky/git/Resources/Sound/HELP.wav", 50);
 			break;
 		case DONE:
-			subPlayer("/home/grabowsky/git/Resources/Sound/DONE.wav", 0);
+			subPlayer("/home/grabowsky/git/Resources/Sound/DONE.wav", 50);
 			break;
 		case DOOR:
-			subPlayer("/home/grabowsky/git/Resources/Sound/DOOR.wav", 0);
+			subPlayer("/home/grabowsky/git/Resources/Sound/DOOR.wav", 50);
 			break;
 		default:
 			break;			
@@ -56,14 +56,13 @@ public class SoundPlayer {
 	    	Mixer.Info[] mixerInfo = AudioSystem.getMixerInfo();
 	        Mixer.Info info = mixerInfo[2]; //Edit this number to select output // 0 = Default
 	   //     Clip c = GetAudioClip(filePath);
-	        GetAudioClip(filePath).start();
+	        GetAudioClip(filePath, volume).start();
 	    } catch (Exception e) {
 	    	System.out.println(e);
 	    }
 	}
     
-	private int Svolume = 50;
-	public static Clip GetAudioClip(String path)
+	public static Clip GetAudioClip(String path, int volume)
 	{
 		File audioFile = new File(path);
 		if (!audioFile.exists())
@@ -76,7 +75,7 @@ public class SoundPlayer {
 			Clip audioClip = AudioSystem.getClip();
 			audioClip.open(audioStream);
 			FloatControl gainControl = (FloatControl) audioClip.getControl(FloatControl.Type.MASTER_GAIN);
-			float gainValue = (((float) 50) * 40f / 100f) - 35f;
+			float gainValue = (((float) volume) * 40f / 100f) - 35f;
 			gainControl.setValue(gainValue);
 
 			return audioClip;
