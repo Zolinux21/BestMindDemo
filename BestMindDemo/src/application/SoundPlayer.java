@@ -29,7 +29,7 @@ public class SoundPlayer {
 		
 		switch(selectSound) {
 		case BACKGROUND:
-			subPlayer("/home/grabowsky/git/Resources/Sound/BACKGROUND.wav", 100);
+			subPlayer("/home/grabowsky/git/Resources/Sound/BACKGROUND.wav", 50);
 			break;
 		case LOSE:
 			subPlayer("/home/grabowsky/git/Resources/Sound/LOSE.wav", 50);
@@ -54,15 +54,16 @@ public class SoundPlayer {
 	private static void subPlayer(String filePath, int volume) {
 		try {
 	    	Mixer.Info[] mixerInfo = AudioSystem.getMixerInfo();
-	        Mixer.Info info = mixerInfo[2]; //Edit this number to select output // 0 = Default
+	        Mixer.Info info = mixerInfo[1]; //Edit this number to select output // 0 = Default
+	        System.out.println(info.getName());
 	   //     Clip c = GetAudioClip(filePath);
-	        GetAudioClip(filePath, volume).start();
+	        GetAudioClip(filePath, volume, info).start();
 	    } catch (Exception e) {
 	    	System.out.println(e);
 	    }
 	}
     
-	public static Clip GetAudioClip(String path, int volume)
+	public static Clip GetAudioClip(String path, int volume, Mixer.Info SoundCard)
 	{
 		File audioFile = new File(path);
 		if (!audioFile.exists())
@@ -72,7 +73,7 @@ public class SoundPlayer {
 
 		try (AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile))
 		{
-			Clip audioClip = AudioSystem.getClip();
+			Clip audioClip = AudioSystem.getClip(SoundCard);
 			audioClip.open(audioStream);
 			FloatControl gainControl = (FloatControl) audioClip.getControl(FloatControl.Type.MASTER_GAIN);
 			float gainValue = (((float) volume) * 40f / 100f) - 35f;
