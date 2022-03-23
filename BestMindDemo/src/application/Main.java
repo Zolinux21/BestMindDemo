@@ -56,7 +56,8 @@ public class Main extends Application {
 	                    public void run() {
 	                       // incrementCount();
 	                    	count++;
-	                    	lblGameTime.setText(Integer.toString(count));
+	                    	GlobalVars.gameTime = count;
+	                    	lblGameTime.setText(Integer.toString(count) + GlobalVars.helpText);
 	            	        if (count > 1) {
 	            	        imageView.setImage(ImageContainer.image2);
 	            	        //imageView.setVisible(false);

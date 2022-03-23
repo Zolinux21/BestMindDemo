@@ -24,28 +24,70 @@ public class ServerThread extends Thread {
             PrintWriter writer = new PrintWriter(output, true);
  
  
-            String text;
+            String Telegram;
+            String Response;
+            
  
             do {
-                text = reader.readLine();
-                //String reverseText = new StringBuilder(text).reverse().toString();
-                //writer.println("Server: " + reverseText);
-                for(int i = 0; i<5; i++) {
-                	Thread.sleep(1000);
-                	
-                    writer.println("value:" + Integer.toString(i));
-                }
-            	
- 
-            } while (!text.equals("bye"));
+            	Telegram = reader.readLine();
+            	System.out.println("Telegram read");
+            	if(!Telegram.equals(null)) {
+            		System.out.println("Start Response");
+            		Response = TelegramProcess.run(Telegram);
+            		writer.println(Response);
+            	}
+
+                
+            } while (Telegram.equals(null));
  
             socket.close();
         } catch (IOException ex) {
             System.out.println("Server exception: " + ex.getMessage());
             ex.printStackTrace();
-        } catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+            try {
+				socket.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
     }
+    
+
+    private String TelegramProcesss(String Telegram) {
+    	String response = "";
+    	String[] data = Telegram.split("&");
+    	String[] ReadValues = data[0].split("#");
+    	String[] WriteValues = data[1].split("#");
+        
+    	//Write
+    	for(int i = 0; i < WriteValues.length; i++) {
+    		String[] Split = WriteValues[i].split("=");
+    		String Var = Split[0];
+    		String Value = Split[1];
+    		switch(Var) {
+    		case "helpImage":
+    			GlobalVars.helpImage = Integer.parseInt(Value);
+    			break;
+    		case "helpText":
+    			GlobalVars.helpText = Value;
+    			break;
+    		}
+    	}
+    	//Read
+    	for(int i = 0; i < ReadValues.length; i++) {
+    		switch(ReadValues[i]) {
+    		case "gameTime":
+    			response = response + Integer.toString(GlobalVars.gameTime) + "#";
+    			break;
+    		case "status":
+    			response = response + Integer.toString(GlobalVars.status) + "#";
+    			break;
+    		}
+    	}
+        
+        return response;
+    }
+    
+    
 }
