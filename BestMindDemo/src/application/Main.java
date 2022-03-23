@@ -28,6 +28,9 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			//Start Server
+			Server.Start(5556,"192.168.1.4");
+			
 			SoundPlayer.play(SoundPlayer.sound.BACKGROUND);
 			ImageContainer.readFileInputs();
 			//
