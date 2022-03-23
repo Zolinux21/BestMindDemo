@@ -12,7 +12,6 @@ public class Server extends Thread{
 	static void Start(int Port, String IP) {
 		Thread ServerThread = new Thread(new Runnable() {
             public void run() {
-            	//int port = 5556;// Integer.parseInt(args[0]);
             	
        	     try (ServerSocket serverSocket = new ServerSocket(Port, 30, InetAddress.getByName(IP))) {
 
